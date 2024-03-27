@@ -1,0 +1,556 @@
+{% extends 'usernav.html' %}
+{% block title %}Event-sport{% endblock %}
+{% block content %}
+<style>
+   .body{
+      overflow: hidden;
+   }
+   /*usernav page css*/
+   /* Style for map options */
+   .map-options {
+   max-width: 250px;
+   margin-top: 60px;
+   margin-left: 20px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   overflow: hidden;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   color: black;
+   }
+   /* Style for header */
+   .map-options__header {
+   background-color: #f5f5f5;
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid #ddd;
+   color: black;
+   }
+   .header-text {
+   font-size: 18px;
+   font-weight: bold;
+   color: black;
+   }
+   .header-minimize {
+   cursor: pointer;
+   color: black;
+   }
+   /* Style for body */
+   .map-options__body {
+   padding: 10px;
+   color: black;
+   }
+   .map-user-location {
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+   color: black;
+   }
+   .address-search {
+   flex: 1;
+   margin-right: 10px;
+   color: black;
+   }
+   /* Style for filters */
+   .map-filters {
+   margin-bottom: 10px;
+   color: black;
+   }
+   .map-filters__individual {
+   margin-bottom: 8px;
+   color: black;
+   }
+   /* Style for clear filters */
+   .map-clear-filters {
+   text-align: center;
+   color: black;
+   }
+   .clear-filters  {
+   background-color: #e0e0e0;
+   color: black; /* Set the text color to black */
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 4px 8px;
+   cursor: pointer;
+   margin-bottom: 15px;
+   transition: background-color 0.3s ease;
+   }
+   .clear-filters button:hover {
+   background-color: #ccc;
+   color: black; /* Set the text color to black on hover as well */
+   }
+   /* Style for filters */
+   .map-filters {
+   margin-bottom: 10px;
+   }
+   .map-filters__individual {
+   margin-bottom: 8px;
+   color: black;
+   }
+   .map-filters__individual input[type="checkbox"] {
+   color: black; /* Set the color for the checkbox */
+   }
+   .map-filters__individual label {
+   color: black; /* Set the color for the label */
+   }
+   /* Style for clear filters */
+   .map-clear-filters {
+   text-align: center;
+   color: black;
+   }
+   .date-button {
+   background-color: #e0e0e0;
+   color: black; /* Set the text color to black */
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 3px 6px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+   margin-top: 10px;
+   margin-left: 10px;
+   margin-bottom: 5px;
+   }
+   .clear-filters button:hover {
+   background-color: #ccc;
+   color: black; /* Set the text color to black on hover as well */
+   }
+   .divider-line {
+   border-top: 3px solid white;
+   margin-top: 10px; /* Adjust margin as needed */
+   margin-bottom: 10px; /* Adjust margin as needed */
+   width: 90%;
+   margin-left: 15px;
+   }
+   .dateposition{
+   color: white;
+   margin-left: 15px;
+   }
+   /* Additional styles for the date picker */
+   #date-range-picker {
+   background-color: #fff; /* Set the background color */
+   color: black; /* Set the text color */
+   border: 1px solid #000; /* Set the border color and style */
+   padding: 10px; /* Add padding for better aesthetics */
+   width: 90%;
+   }
+   #date-range-picker input {
+   color: black; /* Set the text color for input fields */
+   border: 1px solid #000; /* Set the border color and style for input fields */
+   padding: 4px; /* Add padding for better aesthetics */
+   margin-right: 10px; /* Add margin between input fields and button */
+   color: black;
+   }
+   #date-range-picker button {
+   background-color: black; /* Set the background color for the button */
+   color: black; /* Set the text color for the button */
+   border: 1px solid #000; /* Set the border color and style for the button */
+   padding: 4px 8px; /* Add padding for better aesthetics */
+   cursor: pointer;
+   }
+   #date-range-picker button:hover {
+   background-color: #555; /* Change background color on hover */
+   color: black;
+   }
+   /* Additional styles for the date picker */
+   #date-range-picker {
+   background-color: #fff; /* Set the background color */
+   color: black; /* Set the text color */
+   border: 1px solid #000; /* Set the border color and style */
+   padding: 10px; /* Add padding for better aesthetics */
+   width: 200px; /* Set the width */
+   height: auto; /* Set the height to auto or a specific value as needed */
+   box-sizing: content-box; /* Adjust box-sizing if needed */
+   margin-left: 28px;
+   }
+   #date-range-picker input {
+   color: black; /* Set the text color for input fields */
+   border: 1px solid #000; /* Set the border color and style for input fields */
+   padding: 2px; /* Add padding for better aesthetics */
+   margin-right: 10px; /* Add margin between input fields and button */
+   width: 100px; /* Set the width for the input fields */
+   }
+   #date-range-picker button {
+   background-color: #000; /* Set the background color for the button */
+   color: #fff; /* Set the text color for the button */
+   border: 1px solid #000; /* Set the border color and style for the button */
+   padding: 8px 16px; /* Add padding for better aesthetics */
+   cursor: pointer;
+   }
+   #date-range-picker button:hover {
+   background-color: #555; /* Change background color on hover */
+   }
+   .category-section{
+   text-align: center;
+   }
+   .two-column{
+    display: flex;
+   }
+   .map-options__footer {
+  width: 79%;
+  margin-top: -760px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: black;
+  background-color: #555;
+  margin-left: 278px;
+}
+
+.buttons-filter {
+  display: flex;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+  justify-content: flex-start;
+  overflow: hidden;
+  
+  
+}
+
+.map-clear-filters {
+  /* Optionally, you can set a margin to create some space between buttons */
+  margin-right: 10px; /* Adjust the margin as needed */
+  
+}
+
+
+
+   .map-options__footer .closest-hotspot {
+  color: black; /* You can replace 'red' with your desired color value */
+}
+.label-events{
+    margin-top: 10px;
+    margin-left: 15px;
+    color: white;
+    
+}
+.list-category-filter {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 25px;
+  color: red;
+  background: white;
+
+}
+.listing-event{
+   color: black;
+   margin-left: 300px;
+   margin-top: 10px;
+}
+
+/* for listing event*/
+
+.search-container{
+  position: relative;
+  height: 45px;
+  max-width: 650px;
+  width: 70%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top: -11px;
+  margin-left: 350px;
+  color: black;
+}
+
+.search-container i {
+  position: absolute;
+  left: 20px;
+  font-size: 16px;
+  color: black;
+  
+}
+
+#search-input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-left: 50px;
+  background-color: transparent;
+  color: black;
+}
+@media screen and (max-width: 786px) {
+  .search-container{
+    width: 50%;
+  }
+}
+.search-container {
+            display: flex;
+            align-items: center;
+           margin-left: 190px;
+   
+            }
+
+        .search-container i {
+            margin-right: 10px;
+        }
+
+        .main-container {
+    max-width: 1400px;
+    margin-left: 280px;
+    margin-top: -320px;
+    margin-bottom: -10px;
+    padding: 20px;
+    color: black;
+    overflow-x: auto; /* Add horizontal scrollbar if content overflows */
+    white-space: nowrap; /* Prevent content from wrapping to the next line */
+}
+
+.card {
+    width: calc(23% - 20px); /* Adjusted width calculation with margin-right */
+    margin-right: 20px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 290px;
+    color: black;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    color: black;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.card-body {
+    padding: 10px;
+    color: black;
+}
+
+.card p {
+    color: black;
+    margin-bottom: 1px;
+}
+
+.card-btn-icon {
+    width: 230px; /* Adjusted width */
+    display: flex;
+    justify-content: space-between;
+    background-color: #000;
+    border: none;
+    height: auto;
+    overflow: hidden;
+    margin-left: -10px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+.card-btn-icon i {
+    flex: 1;
+    max-width: 70%; /* Adjust the max-width as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.page-changer {
+    display: flex;
+    justify-content: space-between;
+    
+    margin-left: 650px;
+    margin-top: 20px; /* Added margin-top */
+}
+
+.page-changer button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.page-changer button:hover {
+    background-color: #333;
+}
+
+.main-container {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards */
+}
+
+.bc-clr{
+   background: transparent;
+   border: none;
+   color: white;
+    font-weight: 500;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+</style>
+
+<div class="map-options">
+
+   <div class="map-options__header">
+      <span class="header-text">
+      Filters
+      </span>
+
+      <span class="header-minimize">
+      <i class="minus icon"></i>
+      </span>    
+
+   </div>
+
+   <div class="map-options__body">  
+   <label class="dateposition">Date</label> 
+   <div class="date-section">
+      <button class="date-button" id="today">Today</button>
+      <button class="date-button" id="tomorrow">Tomorrow</button>
+      <button class="date-button" id="this-weekend">This Weekend</button>
+   </div>
+   <hr class="divider-line">
+   <label class="dateposition">Category</label>
+
+   <div class=" date-section category-section">
+      <select id="categoryDropdown" class="date-button">
+         <option value="option1">Option 1</option>
+         <option value="option2">Option 2</option>
+         <option value="option3">Option 3</option>
+         <!-- Add more options as needed -->
+      </select>
+   </div>
+
+   <hr class="divider-line">
+
+   <label class="dateposition">Sub Category</label>
+
+   <div class=" date-section category-section">
+      <select id="categoryDropdown" class="date-button">
+         <option value="option1">Option 1</option>
+         <option value="option2">Option 2</option>
+         <option value="option3">Option 3</option>
+         <!-- Add more options as needed -->
+      </select>
+   </div>
+
+   <hr class="divider-line">
+
+   <div class=" date-section category-section">
+      <div class=map-clear-filters>
+         <button class="clear-filters">Clear</button>
+         <button class="clear-filters">Apply</button>
+      </div>
+   </div>
+
+   <!-- Add this to your HTML -->
+   <div id="date-range-picker" style="display: none;">
+      <input type="text" id="start-date" placeholder="Start Date">
+      <input type="text" id="end-date" placeholder="End Date">
+      <button onclick="applyDateRange()">Apply</button>
+      <div id="date-range-overlay"></div>
+   </div>
+
+</div>
+</div>
+
+<div class="map-options__footer">
+   <div class="label-events">
+      <span class="closest-hotspot header-text">
+      our events
+      </span>
+   </div>
+   <div class="search-container ">
+      <i class="fa fa-search"></i>
+      <input type="text" id="search-input" placeholder="Search..." autocomplete="off" />
+  </div>
+
+   <div class="buttons-filter">
+      {% for category in unique_categories %}
+          <div class="map-clear-filters">
+              <button class="clear-filters list-category-filter">{{ category.category }}</button>
+          </div>
+      {% endfor %}
+   </div>
+</div>
+
+
+<div class="main-container" id="cardContainer">
+   {% for show in shows_data %}
+     <div class="card">
+      <video width="100%" height="40%" controls>
+         <source src="data:video/mp4;base64,{{ show.video_base64 }}" type="video/mp4">
+       </video>
+      <div class="card-body">
+        <h5 class="card-title">{{ show.title }}</h5>
+        <p class="card-text"><strong style="color: black;">Game:</strong> {{ show.name }}</p>
+        <p class="card-text"><strong style="color: black;">Category:</strong> {{ show.category }}</p>
+        <p class="card-text"><strong style="color: black;">Release Date:</strong> <small  style="color: black;">{{ show.release }}</small></p>
+        <div class="card-btn-icon">
+          <a href="{{ url_for('auth.detail',show_id=show.id) }}">
+            <i class="fa-solid fa-circle-info"></i>
+          </a>
+          <i class="fa-solid fa-heart" style="margin-left: 70px;"></i>
+        </div>
+      </div>
+     </div>
+   {% endfor %}
+</div>
+
+
+ 
+ 
+<div class="page-changer">
+   <button class="clear-filters list-category-filter bc-clr" onclick="prevPage()">Previous</button>
+   <button class="clear-filters list-category-filter bc-clr" onclick="nextPage()">Next</button>
+</div>
+
+<script>
+  const cardsPerPage = 4; // Change this value to adjust the number of cards per page
+  const cardContainer = document.getElementById('cardContainer');
+  const cards = document.querySelectorAll('.card');
+  let currentPage = 1;
+
+  function showCurrentPage() {
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
+    cards.forEach((card, index) => {
+      card.style.display = index >= startIndex && index < endIndex ? 'block' : 'none';
+    });
+  }
+
+  function nextPage() {
+    const totalPages = Math.ceil(cards.length / cardsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      showCurrentPage();
+    }
+  }
+
+  function prevPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      showCurrentPage();
+    }
+  }
+
+  // Initial display
+  showCurrentPage();
+</script>
+
+
+{% endblock %}

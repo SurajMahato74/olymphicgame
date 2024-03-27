@@ -1,0 +1,229 @@
+{% extends 'usernav.html' %}
+{% block title %}Detail{% endblock %}
+{% block content %}
+
+<style>
+    body {
+    font: 300 18px/1.5 'Muli', sans-serif;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(138deg, #EC407A 60%, #7C4DFF 60%);
+    overflow-x: hidden;
+    padding-bottom: 0 !important;
+    height: 100%;
+    position: relative
+}
+
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+
+.cc-number.identified {
+    background-repeat: no-repeat;
+    background-position-y: 11px;
+    background-position-x: 99%
+}
+
+.right-card {
+    border-top: 10px blue solid;
+    padding-top: 1rem;
+    width: fit-content
+}
+
+.btn-group-lg>.btn,
+.btn-lg {
+    width: -webkit-fill-available
+}
+
+li.borderless {
+    border-top: 0 none !important;
+    font-size: 15px;
+    padding: 0;
+    padding-top: 5%
+}
+
+.fa-check {
+    color: rgb(0, 195, 255)
+}
+
+.card,
+.card-header,
+.card-footer {
+    background-color: white !important
+}
+
+.card-header {
+    border-bottom: none
+}
+
+.cursor-pointer {
+    cursor: pointer
+}
+
+.second-card,
+.first-card {
+    border-top: 1px solid #ccc !important;
+    padding-top: 2rem
+}
+
+.card-image {
+    width: 45px;
+    margin-top: -9px
+}
+
+@media (max-width: 1000px) {
+    .card {
+        padding: 0 !important
+    }
+}
+.black-text{
+    color: black;
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 0 0 50%; /* Adjust the width as needed */
+    padding-right: 15px; /* Optional: Add some spacing between the two fields */
+}
+/* Add this CSS to your existing styles */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    width: 100%;
+    padding-right: 15px; /* Optional: Add some spacing between fields */
+}
+
+.form-group .form-control {
+    width: 100%; /* Make the input fields take up 100% of the width */
+}
+
+.form-row .form-group.col-md-6 {
+    flex: 0 0 48%; /* Adjust the width as needed, leaving space for spacing/margin */
+    padding-right: 15px; /* Optional: Add some spacing between fields */
+}
+</style>
+<div class="container my-container ">
+    <div class="card bg-white px-5">
+        <div class="card-header">
+            <div class="jumbotron mb-1 bg-white ">
+                <h1 class="display-5 black-text"><b class="black-text">You'r almost there</b></h1>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row ">
+                <!-- Left Half -->
+                <div class="col-md-5 ">
+                    <div class="card mt-0 border-0 first-card">
+                        <!-- 1st Card -->
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: blue;">1. Choose your billing cycle</h5>
+                            <div class="row">
+                                <div class="col-md-auto ">
+                                    <div class="custom-control custom-radio custom-control-inline "> <input id="customRadioInline1" type="radio" name="customRadioInline1" class="custom-control-input black-text" checked="true"> <label for="customRadioInline1" class="custom-control-label label-radio black-text">Bill Yearly</label> </div>
+                                    <p class="my-0 black-text"> Rs. 560 / year</p> <del class="text-success">
+                                        <p class="black-text">Rs. 499 / year</p>
+                                    </del>
+                                </div>
+                                <div class="col-md-auto ">
+                                    <div class="custom-control custom-radio custom-control-inline black-text"> <input id="customRadioInline2" type="radio" name="customRadioInline1" class="custom-control-input black-text"> <label for="customRadioInline2" class="custom-control-label label-radio black-text">Bill Monthly</label> </div>
+                                    <p class="black-text"> Rs 2999.99 / year</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2 border-0 second-card">
+                        <!-- Form -->
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: blue;">2. Enter Payment details</h5>
+                            <div class="row">
+                                <div class="col-md-auto col-sm-auto ">
+                                    <div class="custom-control custom-radio custom-control-inline "> <input id="customRadioInline11" type="radio" name="customRadioInline11" class="custom-control-input" checked="true"> <label for="customRadioInline11" class="custom-control-label label-radio"><img src="https://img.icons8.com/color/48/000000/visa.png" class="card-image"> </label> </div>
+                                </div>
+                                <div class="col-md-auto col-sm">
+                                    <div class="custom-control custom-radio custom-control-inline "> <input id="customRadioInline22" type="radio" name="customRadioInline11" class="custom-control-input black-text"> <label for="customRadioInline22" class="custom-control-label label-radio black-text"><img src="https://img.icons8.com/officel/48/000000/discover.png" class="card-image"></label> </div>
+                                </div>
+                            </div> <!-- Payment Form -->
+                            <form method="get" action="">
+                                <div class="form-group">
+                                    <label for="cc-number" class="control-label mt-3 black-text">Card number</label>
+                                    <input id="cc-number" name="cc-number" type="tel" placeholder="xxxx-xxxx-xxxx-xxxx" class="form-control form-control-lg cc-number identified visa black-text" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
+                                    <label for="cc-name" class="control-label mt-3 black-text">Card name</label>
+                                    <input id="cc-name" name="cc-name" type="tel" placeholder="Ram lakhan" class="form-control form-control-lg cc-number identified visa black-text" value="" data-val="true" data-val-required="Please enter the card name" data-val-cc-number="Please enter a valid name" autocomplete="cc-name">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="cc-exp" class="control-label black-text">Expiration date</label>
+                                        <input id="cc-exp" type="tel" class="form-control form-control-lg cc-exp" autocomplete="cc-exp" placeholder="MM / YY" required>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="cc-cvc" class="control-label black-text">CVV<span><i class="fa fa-info-circle px-2" aria-hidden="true"></i> </span> </label>
+                                        <input id="cc-cvc" type="tel" class="form-control-lg form-control cc-cvc black-text" autocomplete="off" placeholder="&bull;&bull;&bull;" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 col-sm-6 black-text">
+                                        <label for="inputState" class="black-text">State</label>
+                                        <select id="inputState" class="form-control form-control-lg black-text">
+                                            <option class="black-text" selected>United State</option>
+                                            <option class="black-text">India</option>
+                                            <option class="black-text">UK</option>
+                                            <option class="black-text">China</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6 black-text">
+                                        <label for="inputZip" class="black-text">Zip</label>
+                                        <input type="text" class="form-control form-control-lg black-text" id="inputZip" placeholder="111111">
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 d-none d-sm-block"></div> <!-- Right Half -->
+                <div class="col-md-6">
+                    <div class="card right-card ">
+                        <div class="card-header ">
+                            <h3 class="font-weight black-text"><b class="black-text">FunOlympic</b></h3>
+                            <h6 class="black-text"><b class="black-text">Bilied Now : $45.99</b></h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text black-text">Perfect Sport Live hosting is a <span class="text-primary ">main aim of FunOlympic</span> having timely delivered and cost effective method,<span class="text-primary"> Live Sport hosting Services</span>. We are highly experienced in offering Live Sports.</p>
+                            <div class="custom-control custom-checkbox checkbox-lg black-text"><input type="checkbox" class="custom-control-input black-text" id="checkbox-2"><label class="custom-control-label black-text" for="checkbox-2">I agree <span class="text-primary cursor-pointer black-text"><u class="black-text"> FunOlympic Terms</u> </span> </label> </div>
+                        </div>
+                        <div class="card-footer black-text"> <button type="submit" class="btn btn-primary btn-lg black-text">Subscribe now</button> </div>
+                    </div>
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color: blue;">What included in Premium Membership</h4>
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush ">
+                                        <li class="list-group-item borderless"><i class="fa fa-check"></i> Liftime Free Sport</li>
+                                        <li class="list-group-item borderless"><i class="fa fa-check"></i> Play and series</li>
+                                        <li class="list-group-item borderless"><i class="fa fa-check"></i> Any time Redem of subscription</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <ul class="list-group list-group-flush p-0">
+                                        <li class="list-group-item borderless"><i class="fa fa-check"></i> Unlimited Watch Time</li>
+                                        <li class="list-group-item borderless"><i class="fa fa-check"></i> Online support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

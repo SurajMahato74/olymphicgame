@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin</title>
+</head>
+<body>
+    <form id="liveEventForm">
+        <label for="liveEventLink">Share Live Event Link:</label>
+        <input type="text" id="liveEventLink" name="liveEventLink" placeholder="Enter live event link">
+        <button type="button" onclick="shareLiveEvent()">Share</button>
+    </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+    
+        function shareLiveEvent() {
+            var liveEventLink = document.getElementById('liveEventLink').value;
+            socket.emit('live_event', { link: liveEventLink });
+        }
+    </script>
+</html>

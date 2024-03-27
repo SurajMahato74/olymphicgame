@@ -1,0 +1,129 @@
+{% extends 'usernav.html' %}
+{% block title %}favourite{% endblock %}
+{% block content %}
+<style>
+    .main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left; 
+    padding: 20px;
+}
+
+.card {
+    
+    max-width: 400px; /* Set a maximum width for the card */
+    height: 300px; /* Set the height for the card */
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card img,
+.card video {
+    width: 100%;
+    height: 30%; /* Adjust the height of the image or video */
+    object-fit: cover; /* Cover the entire area of the card */
+    object-position: center; /* Center the image or video */
+}
+
+.card-body {
+    padding: 10px;
+}
+</style>
+
+<section class="main" style="margin-top: 45px;">
+    <div class="main-container">
+        {% for favourite in favourites %}
+            {% if favourite.show %}
+                <div class="card" style="display: flex;">
+                    <video width="100%" height="40%" controls>
+                        <source src="data:video/mp4;base64,{{ favourite.show.video_base64 }}" type="video/mp4">
+                    </video>
+                    <div class="card-body" style="flex: 1;">
+                        <h5 class="card-title" style="color: black;">{{ favourite.show.title }}</h5>
+                        <p class="card-text"><strong style="color: black;">Game:</strong> <span style="color: black; z-index: 1000;">{{ favourite.show.name }}</span></p>
+                        <p class="card-text"><strong style="color: black;">Category:</strong> <span style="color: black; z-index: 10000;">{{ favourite.show.category }}</span></p>
+                        <p class="card-text"><strong style="color: black;">Release Date:</strong> <span style="color: black;">{{ favourite.show.release }}</span></p>
+                        <div class="card-btn-icon" style="display: flex;">
+
+                    <div class="icon-container" style="margin-right: 10px;">
+                        <a href="{{ url_for('auth.detail', show_id=favourite.show.id) }}">
+                            <i class="fa-solid fa-circle-info" style="color: black; font-size: 30px;"></i>
+                        </a>
+                    </div>
+
+
+<div class="icon-container">
+    <form action="{{ url_for('auth.favourite', show_id=favourite.show.id) }}" method="post" class="save-favorite-form" id="delete-favorite-form">
+        <input type="hidden" name="show_id" value="{{ favourite.show.id }}">
+        <button type="button" class="heart-btn delete-favorite-btn" style="border: none; background-color: transparent;">
+            <i class="fa-solid fa-heart saved" style="color: red; font-size: 30px; margin-left: 80px;"></i>
+        </button>
+    </form>
+</div>
+
+
+</div>
+</div>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+</section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the delete favorite button
+        const deleteFavoriteBtn = document.querySelector('.delete-favorite-btn');
+
+        // Add click event listener
+        deleteFavoriteBtn.addEventListener('click', function() {
+            // Confirm before deleting the favorite
+            const confirmation = confirm('Are you sure you want to remove this show from favorites?');
+            if (confirmation) {
+                // Submit the form via AJAX
+                const form = document.getElementById('delete-favorite-form');
+                const formData = new FormData(form);
+
+                console.log('Form data:', formData); // Check form data
+
+                fetch(form.action, {
+                    method: form.method,
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status); // Check response status
+                    if (response.ok) {
+                        // Reload the page or update the UI as needed
+                        location.reload(); // Reload the page for example
+                    } else {
+                        // Handle errors
+                        alert('Failed to delete favorite show.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the favorite show.');
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+
+

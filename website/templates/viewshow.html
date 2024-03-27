@@ -1,0 +1,57 @@
+{% extends 'adminav.html' %}
+{% block title %} Shows{% endblock %}
+{% block content %}
+
+<style>
+  .content-wrapper{
+    margin-top: -45px;
+    overflow: auto;
+  }
+</style>
+      <!-- partial -->
+      
+        <div class="content-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Show table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Show Id</th>
+                            <th>Title</th>
+                            <th>Name</th>
+                            <th>Release</th>
+                            <th>Duration</th>
+                            <th>Language</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for show in show_data %}
+                        <tr>
+                          <td>{{ show.id }}</td>
+                          <td>{{ show.title }}</td>
+                          <td>{{ show.name }}</td>
+                          <td>{{ show.release }}</td>
+                          <td>{{ show.duration }}</td>
+                          <td>{{ show.duration }}</td>
+                          <td>{{ show.category }}</td>
+                          <td>
+                            <button class="btn btn-outline-primary">Detail</button>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+				</div>
+              </div>
+            </div>
+          </div>
+        
+		
+    {% endblock %}  

@@ -1,0 +1,89 @@
+{% extends 'adminav.html' %}
+{% block title %}Live{% endblock %}
+{% block content %}
+<style>
+    .upload-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.upload-form .form-group {
+    margin-bottom: 20px;
+}
+
+.upload-form .form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.upload-form .form-control-file {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.upload-form .form-control-file:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.upload-form .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.upload-form .text-danger {
+    color: #dc3545;
+}
+
+/* Optional: Add icon */
+.upload-form .upload-icon {
+    margin-right: 10px;
+}
+
+</style>
+
+<div class="upload-form">
+    <h1>Go live</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="video" class="upload-icon"><i class="fas fa-video"></i> Video:</label>
+            {{ form.video(class="form-control-file") }}
+            {% for error in form.video.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <input type="text" placeholder="give title">
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+
+    
+    {% endblock %}

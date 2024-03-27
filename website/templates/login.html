@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel ="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scrollbar when video is playing */
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Place the video behind other elements */
+        }
+
+        .header,
+        .form-container {
+            position: relative;
+            z-index: 1; /* Bring these elements above the video */
+        }
+
+        .form-container {
+            padding: 46px;
+            margin-top: -80px;
+            margin-left: -100px;
+        }
+        .message{
+        z-index: 1000;
+      }
+      .login-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid #4CAF50; /* Green border */
+    transition: all 0.3s ease; /* Smooth transition effect */
+    margin-left: 690px;
+    margin-top: 20px;
+}
+
+.login-link:hover {
+    background-color: white; /* Change background color on hover */
+    color: #4CAF50; /* Change text color on hover */
+    border-color: #4CAF50; /* Change border color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+}
+
+    </style>
+    <title>Register Page</title>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="/static/img/intro3.mp4" type="video/mp4">
+        
+    </video>
+
+    <div class="header">
+        <!-- Your header content here -->
+    </div>
+    <div class="message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" id="flash-message">
+                {{ message }}
+                <span class="close-icon" onclick="hideMessage(this)">X</span>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      
+    <section class="form-container">
+        <!-- Your form content here -->
+        <form method="post" action="{{ url_for('auth.loginn') }}">
+            <h1 style="color: white;">FunOlympic</h1>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <div class="input-field">
+                <label>Email</label><br>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-field">
+                <label>Password</label><br>
+                <input type="password" name="password" placeholder="Your password" required>
+            </div>
+            <input type="submit" name="submit-btn" value="Login" class="btn">
+            <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a></p>
+            <a href="">Forgot Password</a>
+        </form>
+        
+        <a href="{{url_for('auth.adminlogin')}}" class="login-link">Login as Admin</a>
+
+
+    </section>
+
+    <script>
+        function hideMessage(element) {
+          element.parentElement.style.display = 'none';
+        }
+      </script>
+</body>
+</html>

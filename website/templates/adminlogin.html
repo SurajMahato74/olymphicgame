@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Food Ordering Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/static/admin/assets/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/static/admin/assets/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="/static/admin/assets/css/bootstrap-datepicker.min.css">
+ 
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/static/admin/assets/css/style.css">
+  <style>
+  .message-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  margin-bottom: -20px;
+  z-index: 1000;
+  background: transparent;
+  padding-bottom: -20px;
+  border: 2px solid white; /* Added color value 'black' */
+  border-radius: 20px;
+  outline: none; /* Added 'none' value */
+}
+
+
+.alert {
+  position: relative;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.close-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.5; /* Initial opacity for X button */
+  transition: opacity 0.3s ease; /* Add transition for smooth opacity change */
+}
+
+.close-icon:hover {
+  opacity: 1; /* Change opacity on hover */
+}
+
+.message-box:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+}
+
+
+         .login-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid #4CAF50; /* Green border */
+    transition: all 0.3s ease; /* Smooth transition effect */
+    margin-left: 140px;
+    margin-top: 20px;
+}
+
+.login-link:hover {
+    background-color: white; /* Change background color on hover */
+    color: #4CAF50; /* Change text color on hover */
+    border-color: #4CAF50; /* Change border color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+}
+.message-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  margin-right: 540px;
+}
+
+.alert {
+  position: relative;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.close-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<div class="message-box">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" id="flash-message">
+          {{ message }}
+          <span class="close-icon" onclick="hideMessage(this)">X</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<body class="sidebar-light">
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+              <div class="brand-logo text-center">
+                FunOlympic
+              </div>
+              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <form class="pt-3" action="{{ url_for('auth.adminlogin') }}" method="POST">
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password">
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class=" btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                </div>
+            </form>
+            
+            </div>
+            <a href="{{url_for('auth.login')}}" class="login-link">Login as User</a>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+  <!-- plugins:js -->
+  <script src="/static/admin/assets/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/static/admin/assets/js/Chart.min.js"></script>
+  <script src="/static/admin/assets/js/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/static/admin/assets/js/off-canvas.js"></script>
+  <script src="/static/admin/assets/js/hoverable-collapse.js"></script>
+  <script src="/static/admin/assets/js/template.js"></script>
+  <script src="/static/admin/assets/js/settings.js"></script>
+  <script src="/static/admin/assets/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/static/admin/assets/js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+  <script>
+    function hideMessage(element) {
+      element.parentElement.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

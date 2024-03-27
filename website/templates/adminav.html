@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block title %}Navbar{% endblock %}
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/static/admin/assets/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/static/admin/assets/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="/static/admin/assets/css/bootstrap-datepicker.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/static/admin/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body class="sidebar-light">
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+        <ul class="navbar-nav mr-lg-2 d-none d-lg-flex">
+          <li class="nav-item nav-toggler-item">
+            <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </li>
+          
+        </ul>
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="{{ url_for('auth.adminindex') }}">FunOlympic</a>
+          <a class="navbar-brand brand-logo-mini" href="{{ url_for('auth.adminindex') }}"><img src="assets/images/logo.png" alt="logo"/></a>
+        </div>
+        <ul class="navbar-nav navbar-nav-right">
+          
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <span class="nav-profile-name">{{ session['user_name'] }}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('auth.adminlogout') }}"> 
+                <i class="mdi mdi-logout text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          
+          <li class="nav-item nav-toggler-item-right d-lg-none">
+            <button class="navbar-toggler align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.adminindex') }}">
+              <i class="mdi mdi-view-quilt menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.adminform') }}">
+              <i class="fa fa-tasks menu-icon"></i>
+              <span class="menu-title">Manage Show</span>
+            </a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.firm') }}">
+              <i class="fa fa-upload menu-icon"></i>
+              <span class="menu-title">Upload Show</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.adminnew')}}">
+              <i class="fa fa-user-plus menu-icon"></i>
+              <span class="menu-title">Register Admin</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.live_upload')}}">
+              <i class="fa fa-video-camera menu-icon"></i>
+              <span class="menu-title">Go Live</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.admintable') }}">
+              <i class="fa fa-user menu-icon"></i>
+              <span class="menu-title">View User</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.viewshow') }}">
+              <i class="mdi mdi-view-quilt menu-icon"></i>
+              <span class="menu-title">View Show</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.resetuser') }}">
+              <i class="fa fa-wrench menu-icon"></i>
+              <span class="menu-title">Reset User</span>
+            </a>
+          </li>
+		  
+		  <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.adminlogin') }}">
+              <i class="mdi mdi-airplay menu-icon"></i>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {% block content %}
+      
+
+          {% endblock %}
+          
+        </div>
+
+        
+ 
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 . All rights reserved.</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/static/admin/assets/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/static/admin/assets/js/Chart.min.js"></script>
+  <script src="/static/admin/assets/js/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/static/admin/assets/js/off-canvas.js"></script>
+  <script src="/static/admin/assets/js/hoverable-collapse.js"></script>
+  <script src="/static/admin/assets/js/template.js"></script>
+  <script src="/static/admin/assets/js/settings.js"></script>
+  <script src="/static/admin/assets/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/static/admin/assets/js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+</body>
+</html>

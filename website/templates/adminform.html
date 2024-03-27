@@ -1,0 +1,187 @@
+{% extends 'adminav.html' %}
+{% block title %} Manage Show{% endblock %}
+{% block content %}
+
+<style>
+    .user-data-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+  
+    .user-data-form h4 {
+      margin-top: 0;
+      color: #333;
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .left-column {
+      width: 50%;
+    }
+  
+    .right-column {
+      width: 50%;
+    }
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .password-form {
+        display: none; /* Initially hide the form */
+        margin-top: 20px;
+        margin-left: 360px;
+        border: 1px solid black;
+        width: 305px;
+        padding: 10px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+  
+   
+  </style>
+  
+   
+  
+  
+
+<style>
+    
+.search-box {
+  width: 300px;
+  margin: 5px auto;
+  border-radius: 12px;
+  background-color: aliceblue;
+  box-shadow: #333;
+  margin-top: -20px;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  margin-left: 40px;
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 30%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+</style>
+<div class="message" style="margin-top: -20px; margin-bottom: 10px;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" id="flash-message">
+          {{ message }}
+          <span class="close-icon" onclick="hideMessage(this)" style="cursor: pointer; margin-left: 800px;">X</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="box">
+  <form action="{{ url_for('auth.manageshow') }}" method="post" id="search-form">
+    <div class="search-box" style="border: 1px solid #333;">
+      <h3 style="margin-left: 85px;">Search Show</h3>
+      <input type="text" name="email" placeholder="Search by show id" id="search-input">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+
+</div>
+
+
+{% if show_data %}
+<form action="{{ url_for('auth.manageshow') }}" method="post">
+    <input type="hidden" name="title" value="{{ show_data.title }}"> <!-- Hidden input field for title -->
+    <div class="user-data-form">
+        <div class="form-column">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" class="form-control" value="{{ show_data.title }}">
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" style="margin-left: -1px; width: 250px;" id="name" name="name" class="form-control" value="{{ show_data.name }}">
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" style="margin-left: -1px; width: 250px;" id="category" name="category" class="form-control" value="{{ show_data.category }}">
+            </div>
+            <div class="form-group">
+                <label for="release">Release:</label>
+                <input type="text" id="release" name="release" class="form-control" value="{{ show_data.release }}">
+            </div>
+            <div class="form-group">
+              <label for="language">Language:</label>
+              <input type="text" id="language" name="language" class="form-control" value="{{ show_data.language }}">
+          </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px; margin-left: -80px;">
+      <button type="submit" style="width: 100px;" name="save" value="save">Save</button>
+      <button type="button" style="width: 150px;" id="changePasswordBtn">Delete Show</button>
+      <a href="{{ url_for('auth.showdetail', id=show_data.id) }}"><button type="button" style="width: 100px;">See Details</button></a>
+      
+  </div>
+   
+</form>
+{% elif error_message %}
+<div class="user-data-form">
+    <p>{{ error_message }}</p>
+</div>
+{% endif %}
+
+<script>
+  function hideMessage(element) {
+    element.parentElement.style.display = 'none';
+  }
+</script>
+
+{% endblock %}

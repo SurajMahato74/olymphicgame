@@ -1,0 +1,103 @@
+{% extends 'adminav.html' %}
+{% block title %}Homepage{% endblock %}
+{% block content %}
+    <style>
+        body {
+    font-family: Arial, sans-serif; /* Set a common font family for better readability */
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Set a light gray background color */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-top: 50px; /* Add some top margin for spacing */
+}
+
+.alert {
+    padding: 10px; /* Add padding to alerts for better readability */
+    margin-bottom: 10px; /* Add margin between alerts */
+}
+
+.alert-success {
+    background-color: #d4edda; /* Set a light green background for success messages */
+    color: #155724; /* Set a dark green text color for success messages */
+}
+
+.alert-danger {
+    background-color: #f8d7da; /* Set a light red background for error messages */
+    color: #721c24; /* Set a dark red text color for error messages */
+}
+
+form {
+    max-width: 500px; /* Limit the width of the form for better readability */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add some padding for spacing */
+    background-color: #fff; /* Set a white background color */
+    border-radius: 8px; /* Add some border radius for a rounded look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+    margin-top: -40px;
+    margin-bottom: 20px;
+    width: 700px;
+}
+
+label {
+    display: block; /* Display labels as blocks for better alignment */
+    margin-bottom: 5px; /* Add some bottom margin for spacing */
+    align-items: center;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="submit"] {
+    width: 100%; /* Set input fields to full width */
+    padding: 10px; /* Add padding for better appearance */
+    margin-bottom: 15px; /* Add bottom margin for spacing between inputs */
+    border: 1px solid #ccc; /* Add a border for input fields */
+    border-radius: 5px; /* Add some border radius for a rounded look */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+input[type="submit"] {
+    background-color: purple; /* Set a blue background color for the submit button */
+    color: #fff; /* Set white text color for better contrast */
+    cursor: pointer; /* Change cursor to pointer on hover for better interaction */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Darken the background color on hover for better visual feedback */
+}
+
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('auth.adminnew') }}" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="contact">Contact:</label><br>
+        <input type="number" id="contact" name="contact" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %} 

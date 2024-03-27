@@ -1,0 +1,172 @@
+{% extends 'usernav.html' %}
+{% block title %}Homepage{% endblock %}
+{% block content %}
+
+    <section style="background-color: #eee; margin-top: 70px;">
+        
+      
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3">{{ user.name}}</h5>
+                  <p class="text-muted mb-1">{{ user.email}}</p>
+                  <p class="text-muted mb-4">{{user.country}}</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary" id="resetPasswordBtn">Reset Password</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fas fa-globe fa-lg text-warning"></i>
+                      <p class="mb-0">https://{{user.name}}.com</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                      <p class="mb-0">{{user.name}}</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                      <p class="mb-0">@{{user.name}}</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                      <p class="mb-0">https://{{user.name}}.insta</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                      <p class="mb-0">https://{{user.name}}.fb</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.name}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.email}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.contact_number}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Country</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.country}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <form action="{{ url_for('auth.change_password') }}" method="POST" id="passwordChangeForm" style="display: none; margin-bottom: 10px;background-color: #999; margin-left: 250px; width: fit-content;border-radius: 15px; padding: 10px; border: 1px solid wheat;">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="old_password">Old Password:</label>
+                        <input type="password" name="old_password" id="old_password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password:</label>
+                        <input type="password" name="new_password" id="new_password" class="form-control" required>
+                    </div>
+                    <button type="submit" class=" btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Change Password</button>
+                </form>
+                  
+                 <div class="row">
+                <div class="col-md-12">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p class="mb-4"><span class="text-primary font-italic me-1">Favourite</span> Shows
+                      </p>
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Name</th>
+                                <th>Release om</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for show in favorite_shows %}
+                            <tr>
+                                <td>{{ show.show.title }}</td>
+                                <td>{{ show.show.category }}</td>
+                                <td>{{ show.show.name }}</td>
+                                <td>{{ show.show.release }}</td>
+                                
+                                <td>
+                                  <div class="d-flex align-items-center">
+                                      <form action="{{ url_for('auth.profile') }}" method="post">
+                                          <input type="hidden" name="show_id" value="{{ show.id }}">
+                                          <button type="submit" class=" btn-danger me-2">Delete</button>
+                                      </form>
+                                      <a href="{{ url_for('auth.detail', show_id=show.id) }}">
+                                          <i class="fa fa-info-circle" style="color: white; font-size: 30px; margin-left: 15px;"></i>
+                                      </a>
+                                  </div>
+                              </td>
+                              
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                  </div>
+                </div>
+                </div>
+
+
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get references to the button and the form
+        var resetPasswordBtn = document.getElementById('resetPasswordBtn');
+        var passwordChangeForm = document.getElementById('passwordChangeForm');
+    
+        // Add event listener to the button
+        resetPasswordBtn.addEventListener('click', function() {
+            // Toggle the visibility of the form
+            if (passwordChangeForm.style.display === 'none') {
+                passwordChangeForm.style.display = 'block';
+            } else {
+                passwordChangeForm.style.display = 'none';
+            }
+        });
+    });
+  </script>
+
+
+      {% endblock %}

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <script src="/static/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .message{
+        z-index: 1000;
+      }
+    </style>
+</head>
+<body>
+ 
+<section class="secondsection">
+  <div class="header video" id="header">
+   
+
+<div class="nav" id="navbar">
+   
+  <div class="logo">
+    <a href="index.html"><img src="/static/img/logo-removebg-preview.png"></a>
+   </div>
+  
+
+   <div class="login-menu" id="loginMenu">
+     <ul>
+         <li><a href="login.html">Login</a></li>
+         <li><a href="{{ url_for('auth.admin') }}">Admin</a></li>
+         <li><a href="{{ url_for('auth.usernav') }}">nav</a></li>
+         <li><a href="{{ url_for('auth.event') }}">event</a></li>
+         <li><a href="{{ url_for('auth.showdetail') }}">detail</a></li>
+         <li><a href="{{ url_for('auth.package') }}">package</a></li>
+         <li><a href="{{ url_for('auth.checkout') }}">checkout</a></li>
+         <li><a href="{{ url_for('auth.firm') }}">checkout</a></li>
+     </ul>
+ </div>
+  <div class="icon">
+    <a href="#"><i class="fa-regular fa-bell"></i></a>
+    <a href="#"><i class="fa-regular fa-heart"></i></a> 
+    <a href="#"><i class="fa-regular fa-user" id="loginIcon"></i></a>
+  </div>
+  <ol>
+     
+      <a href="index.html"><li>Home</li></a> 
+      <a href="#"><li>Sports</li></a> 
+      <a href="#"><li>schedule</li></a>
+      <a href="#"><li>Venue</li></a>
+      <a href="#"><li>pricing</li></a>
+  </ol>
+</div> 
+
+
+<div class="background-video">
+  <video autoplay loop muted>
+      <source src="/static/img/intro3.mp4" type="video/mp4">
+     
+  </video>
+</div>
+
+<div class="message">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" id="flash-message">
+          {{ message }}
+          <span class="close-icon" onclick="hideMessage(this)">X</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="quotesvideo">
+
+  <h4>Experience The Execlusive</h4>
+  <h1><b>OLYMPIC GAMES PARIS 2024</b></h1>
+
+</div>
+<div class="countdown-container" id="countdown">
+  <div class="picturea">
+    <img src="/static/img/logo-removebg-preview.png">
+  </div>
+  <div class="textappear">
+    Time left until the<br> Olympic Games Paris 2024
+  </div>
+  <div class="countdown-box">
+      <div class="countdown-number" id="days">00</div>
+      <div class="countdown-label">Days</div>
+  </div>
+  <div class="countdown-box">
+      <div class="countdown-number" id="hours">00</div>
+      <div class="countdown-label">Hours</div>
+  </div>
+  <div class="countdown-box">
+      <div class="countdown-number" id="minutes">00</div>
+      <div class="countdown-label">Minutes</div>
+  </div>
+  <div class="countdown-box">
+      <div class="countdown-number" id="seconds">00</div>
+      <div class="countdown-label">Seconds</div>
+  </div>
+
+</div>
+</div>
+
+</div>
+</section>
+<section class="some quotes">
+  <div class="divaftersection" id="divaf">
+
+
+
+</div>
+
+
+  <!-- Add these buttons where you want to trigger the next and previous slides -->
+<button id="prevButton" class="btn slideprev"><i class="fa-solid fa-backward"></i></button>
+<button id="nextButton" class="btn slidenext"><i class="fa-solid fa-forward"></i></button>
+
+<section class="listofticket">
+  <div class="themeregister">
+    <h1><span>Unleash</span> the <span> FunOlympic</span>  Spirit: <br>
+      <a href=""><u>Register Now</u></a> <span>for the</span><br> <span>Ultimate </span> Online <span>Games </span>Experience!
+    </h1>
+  </div>
+
+  <div class="registerbtn">
+    <a href="login.php"><button type="submit" class="btn">Register Now</button></a>
+  </div>
+</section>
+
+
+
+
+
+  <div class="carousel-wrapper">
+    <div class="carousel-container">
+      <!-- Repeat the following content-box structure for each item -->
+      <div class="container">
+        <div class="content-box">
+          <div class="pro">
+            <video width="100%" height="100%" controls>
+              <source src="static/img/intro3.mp4" type="video/mp4">
+            </video>
+            <div class="des">
+              <span>Premium combo package 4g</span>
+              <h5>1 Month</h5>
+              <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <h4>Rs. 264/-</h4>
+              <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+            </div>
+          </div>
+        </div>
+        <!-- End content-box -->
+
+        <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Premium unlimited combo package</span>
+                <h5>1 year</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs.5896</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+          <!-- End content-box -->
+                 <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Premium  1 day pack</span>
+                <h5>24 hour</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs. 29 lakh</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+          <!-- End content-box -->
+                 <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Premium  3 day pack</span>
+                <h5>3 days</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs. 296</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+          <!-- End content-box -->
+                 <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Premium  15 day pack </span>
+                <h5>unlimited 15 days</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs. 296</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+          <!-- End content-box -->
+                 <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Land</span>
+                <h5>2 Anna 6 ropani</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs. 29 lakh</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+
+        
+          <!-- End content-box -->
+                 <!-- Repeat the above content-box structure for each item -->
+        <div class="container">
+          <div class="content-box">
+            <div class="pro">
+              <video width="100%" height="100%" controls>
+                <source src="static/img/intro3.mp4" type="video/mp4">
+              </video>
+              <div class="des">
+                <span>Land</span>
+                <h5>2 Anna 6 ropani</h5>
+                <div class="star">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Rs. 29 lakh</h4>
+                <a href=""><button type="submit" class="btnsmall">Watch Now</button></a>
+              </div>
+            </div>
+          </div>
+          <!-- End content-box -->
+         
+      </div>
+    </div>
+    
+      
+
+  </div>
+</section>
+
+<div class="livesection">
+ 
+  <div class="live-video-container">
+
+    <h4 class="viewer">2.6k</h4>
+    <h1 ><b>Enojoy Live stream ! with Us</b></h1>
+    <i class="fa-solid fa-eye"></i>
+    <h4>live</h4>
+    <butoon type="submit" class="livebtn">Watch Now</butoon>
+     
+    <iframe src="/static/img/intro.mp4"  loop muted  width="100%" height="400px" frameborder="0" allowfullscreen autoplay></iframe>
+
+    
+<div class="upcomingevent">
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="/static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+  <div class="upcoming-container">
+    <video width="100%" height="100%" controls>
+      <source src="static/img/intro3.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Long Jump</h3>
+    <span>Date: 525555</span>
+    <button class="btnupcoming">Get entry</button>
+   <h5 class="text1">$10.00-$25.00</h5> 
+
+  </div>
+</div>
+
+  </div>
+</div>
+<script>
+  function hideMessage(element) {
+    element.parentElement.style.display = 'none';
+  }
+</script>
+</body>
+</html>

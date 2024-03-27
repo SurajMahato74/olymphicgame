@@ -1,0 +1,817 @@
+*{
+    margin: 0 0;
+    padding: 0 0;
+   
+    color: whitesmoke;
+}
+
+
+img{
+    size: 20px;
+}
+.nav {
+    
+    padding: 16px;
+    position: fixed;
+
+    top: 0;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    width: 100%;
+    text-align: center;
+   
+}
+.message{
+    
+}
+.scrolled {
+    background-color: black; /* Change to your desired background color */
+    
+}
+
+
+
+.nav li{
+    display: inline-block;
+    margin-left: 40px;
+    font-size: 18px;
+    
+}
+
+.nav ol{
+    list-style-type: none;  
+   margin-top: 10px;
+    margin-left: -100px;
+    margin-right: 0;
+    
+
+}
+body {
+    height: 1500px; /* Adjust height for testing scroll */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+}
+
+
+
+
+
+.registerbtn {
+   
+    bottom: 20px; /* Adjust the bottom position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Ensure button is above the background */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.btn {
+    width: 300px;
+    margin-left: 50px;
+    padding: 18px 30px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ffaa00, #ff4500); /* Set linear gradient background */
+    color: #fff; /* Set button text color */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+   
+}
+
+.btn:hover {
+    background-color: #e04107; /* Change button background color on hover */
+}
+
+
+.divaftersection {
+    margin-top: 460px; /* Adjust the top margin as needed */
+    
+   
+    color: #fff; /* Set text color to white */
+    text-align: center;
+    padding: 50px 0; /* Add padding for better visibility */
+    margin-bottom: 0px; /* Adjust the bottom margin as needed */
+    height: 580px;
+    
+}
+
+
+
+.listofticket{
+    z-index: 3;
+}
+
+.nav .logo{
+    position: fixed;
+    z-index: 4;
+}
+.nav .logo img{
+    height: 75px;
+    width: 220px;
+    margin-top: -10px;
+    z-index: 4;
+}
+
+.nav .icon{
+    display: flex;
+    position: fixed;
+    top: 10px;
+    right: 20px ;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    z-index: 4;
+    
+}
+.scrolled {
+    background-color: black; /* Change to your desired background color */
+}
+.nav .icon i{
+    margin-right: 18px;
+    font-size: 20px;
+    padding: 10px;
+    z-index: 4;
+}
+
+.somequotes{
+    z-index: 3}
+
+
+.countdown-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-radius: 10px;
+   position: inherit;
+    padding: 20px;
+    margin-top: 340px;
+    width: 60%;
+    border-radius: 50px;
+    margin-left: 256px;
+    /* Optional: Style for text inside the box */
+    
+    background: rgba(51, 51, 51, 1); /* Set background with full opacity */
+    font-weight: bold;
+    z-index: 100;
+}
+
+.quotesvideo {
+    position: absolute;
+    top:200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3; /* Bring the quotes video container above the countdown container and video */
+    text-align: center;
+    color: #fff; /* Set text color */
+    width: 100%;
+    padding: 20px; /* Add some padding for better visibility */
+    border-radius: 10px;
+}
+
+.quotesvideo h4 {
+    margin: 0;
+    font-size: 30;
+   
+}
+
+.quotesvideo h1 {
+    margin: 10px 0;
+    font-size: 60px;
+    
+}
+
+
+
+.countdown-box {
+    text-align: center;
+    margin-left: 1px;
+    margin-right: 1px;
+  padding: 6px;
+    width: 40px; /* Adjust the width and height as needed */
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Optional: Style for text inside the box */
+    color: #fff;
+    font-weight: bold;
+}
+.textappear{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+}
+.picturea img{
+    height: 60px;
+
+}
+
+/* Add a hover effect to the box */
+.countdown-box:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.countdown-number {
+    font-size: 2em;
+    font-weight: bold;
+    
+}
+
+.countdown-label {
+    font-size: 0.8em;
+}
+.themeregister{
+    text-align: center;
+}
+.themeregister h1 {
+    font-size: 3em;
+    margin-top: 800px;
+    margin-left: 50px;
+
+}
+
+.themeregister h1 span {
+    color: #e44d26;
+}
+
+
+.registerbtn{
+    margin-left: 800px;
+    margin-top: 23px;
+    z-index: 3;
+}
+
+.login-menu {
+    display: none;
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    right: 20px;
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 0px;
+    box-shadow: 0 2px 5px 0 2px 5px rgba(255, 69, 0, 0.5);
+    z-index: 3;
+    margin-right: 25px;
+    align-items: center;
+    text-align: center;
+}
+
+.login-menu ul {
+    list-style: none; /* Remove default list styles */
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Display list items vertically */
+}
+
+.login-menu li {
+    margin: 5px 0; /* Adjust margin as needed */
+}
+.login-menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.form-container {
+    background: var(--orange);
+    width: 110%;
+    height: 190vh;
+    position: relative;
+    backdrop-filter: blur(2px);
+    /* Adjust the blur intensity as needed */
+    opacity: 0.8;
+    margin-top: -80px;
+}
+.input-field label {
+    font-weight: 400;
+}
+
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10px;
+    width: 255px;
+    height: 900px;
+    background-size: 255px;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+.form-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 255px;
+    height: 220px;
+    background-size: 255px;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.form-container h1 {
+    color: #1e4090;
+    text-transform: uppercase;
+    margin: 2rem 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.form-container form {
+    width: 50%;
+    margin: 0rem auto;
+    background: rgb(255, 255, 255/100%);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    border-radius: 25px;
+    box-shadow: #1e4090;
+    text-align: center;
+    padding: 0.3rem;
+    background: black;
+    backdrop-filter: none;
+    transition: transform 0.3s linear;
+    &:hover {
+        transform: scale(0.9);
+        /* Adjust the scale factor as needed */
+    }
+}
+
+.form-container form label {
+    text-transform: uppercase;
+    width: 100%;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.form-container form input {
+    width: 50%;
+    height: 38px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: black;
+    color: white;
+    
+    border: 1px solid white;
+    transition: transform 0.3s linear;
+    &:hover {
+        transform: scale(1.1);
+        /* Adjust the scale factor as needed */
+    }
+}
+
+.form-container p {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+.form-container p a {
+    color: red;
+}
+
+.form-container form textarea {
+    width: 55%;
+    height: 200px;
+    transition: transform 0.3s linear;
+    &:hover {
+        transform: scale(1.1);
+        /* Adjust the scale factor as needed */
+    }
+}
+
+
+/*for register page*/
+.twocontainer {
+    display: flex; /* Use flexbox to create a two-column layout */
+    max-width: 900px; /* Set a maximum width for the form */
+    margin: -10px auto;
+
+}
+
+
+
+.registerinput-field {
+    margin-bottom: 15px;
+    width: 400px;
+    margin-left: -30px;
+}
+
+.registerinput-field select {
+    width: 54%; /* Set the width to 100% to make it span the entire width of the container */
+    padding: 8px; /* Add padding to the dropdown for better spacing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-bottom: 12PX;
+    margin-top: 12px;
+    color: black;
+}
+
+section {
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    position: absolute;
+    top: 0;
+    transition: transform 1s ease; /* Transition transform with a duration of 1 second */
+}
+
+.fontpage {
+    background-color: #ffcc00; /* Yellow background for the first section */
+    color: #333; /* Dark text on yellow background */
+}
+
+.secondsection {
+   
+    background-color: #333;
+    color: #fff; /* Light text on dark background */
+    
+}
+
+/* Styles for the video container */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.slideprev , .slidenext{
+z-index: 4;
+}
+
+
+/* Style for the "Previous" button */
+.slideprev {
+    position: absolute;
+    top: 205%;
+    left: 10px; /* Adjust the left position as needed */
+    z-index: 2; /* Set a higher z-index */
+    background-color: #333; /* Background color for the left side */
+    color: #fff; /* Text color */
+    padding: 10px 15px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    width: 8%;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for a smooth hover effect */
+}
+
+/* Style for the "Next" button */
+.slidenext {
+    position: absolute;
+    top: 205%;
+    right: 10px; /* Adjust the right position as needed */
+    z-index: 2; /* Set a higher z-index */
+    background-color: #333; /* Background color for the right side */
+    color: #fff; /* Text color */
+    padding: 10px 15px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    width: 8%;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease; /* Add transition for a smooth hover effect */
+}
+
+/* Hover effect for both buttons */
+.slideprev:hover, .slidenext:hover {
+    background-color: #555; /* Change background color on hover */
+}
+
+
+.background-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.background-video::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Black color for the overlay */
+    z-index: 2; /* Place the overlay above the video */
+    opacity: 0.7; /* Adjust the opacity as needed */
+}
+/* Styles for the logo and icon */
+.logo, .icon {
+    
+    z-index: 5; /* Bring them above the video */
+}
+
+
+
+
+section {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    
+    transition: opacity 1s ease;
+}
+.themeregister{
+    z-index: 4;
+}
+
+
+  .carousel-wrapper {
+    overflow: hidden;
+    z-index: 4;
+  }
+  
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    z-index: 4;
+    margin-top: 120px;
+  }
+  
+  .container {
+    display: flex;
+    z-index: 4;
+  }
+  
+  .content-box {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 250px;
+    background: black;
+    position: relative;
+    overflow: hidden; /* Prevent content overflow during the hover effect */
+    transition: transform 0.3s ease;
+    z-index: 4;
+  }
+  .content-box:hover {
+    transform: scale(1.1); /* Zoom in by 10% on hover */
+}
+
+  
+  .content-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .des {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
+  .des .btnsmall {
+    width: 130px;
+    padding: 8px 15px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ffaa00, #ff4500);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+
+ 
+
+ /* Style for the live section */
+/* Style for the live video container */
+.live-video-container {
+    position: relative;
+    z-index: 1; /* Set a z-index to appear above the background */
+    margin-top: 1820px; /* Adjust the margin as needed */
+}
+
+/* Style for the embedded video (example with an iframe) */
+.live-video-container iframe {
+    width: 90%; /* Set the desired width for the video */
+    height: 350px; /* Set the desired height for the video */
+    margin: 0 auto; /* Center the video horizontally */
+    display: block;
+    margin-top: 120px; /* Ensure the video is a block-level element */
+}
+
+/* Style for the heading inside the container */
+.live-container h3 {
+    color: #fff; /* Set the text color */
+    font-size: 24px;
+    z-index: 4; /* Set the font size */
+}
+.live-container h3 {
+    color: #fff; /* Set the text color to white or another contrasting color */
+    font-size: 24px;
+    z-index: 4;
+}
+
+/* Style for the logo/image inside the container */
+.live-container img {
+    width: 100px; /* Set the desired width */
+    height: auto;
+    z-index: 1;
+}
+
+.livesection .live-video-container h4.viewer {
+    align-items: center;
+     text-align: center;
+     margin-top: 20px;
+     margin-left: 105px;
+     position: absolute;
+     color: white;
+     font: bold;
+
+  }
+  .livesection .live-video-container h4 {
+    align-items: center;
+     text-align: center;
+     margin-top: 2px;
+     margin-left: 80px;
+     position: absolute;
+     color: red;
+     font: bold;
+
+  }
+  .viewer{
+    margin-left: 20px;
+  }
+  .livesection .live-video-container h1 {
+    align-items: center;
+     text-align: center;
+     margin-top: -120px;
+     margin-left: 10px;
+     position: absolute;
+     color: white;
+     font: bold;
+     margin-left: 450px;
+
+  }
+  
+  .livesection .live-video-container i{
+    align-items: center;
+     text-align: center;
+     margin-top: 20px;
+     margin-left: 80px;
+     position: absolute;
+     
+     font: bold;
+
+  }
+
+  .livesection .live-video-container .livebtn {
+    align-items: center;
+    text-align: center;
+    margin-top: 150px;
+    margin-left: 610px;
+    position: absolute;
+    
+    width: 100px;
+    padding: 12px 18px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ffaa00, #ff4500); /* Set linear gradient background */
+    color: #fff; /* Set button text color */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /
+
+  }
+
+  .upcomingevent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    margin-right: 50px;
+   
+    width: 100%;
+    
+    
+  }             
+ 
+
+
+.upcoming-container:hover {
+  transform: scale(1.1); /* Zoom in by 10% on hover */
+}
+  .upcoming-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 2px solid wheat;
+    width: 18%;
+    margin-top: 20px;
+    background: #000;
+    overflow: hidden; /* Prevent content overflow during the hover effect */
+  transition: transform 0.3s ease;
+    
+
+  }
+  
+  .upcoming-container video {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Set a maximum height for the video */
+
+  }
+  
+  .upcoming-container h1,
+  .upcoming-container h3,
+  .upcoming-container span,
+  .upcoming-container a {
+    margin: 10px 0;
+  }
+  
+  
+  .btnupcoming {
+    width: 100px;
+    padding: 9px 12px;
+    font-size: 12px;
+    background: linear-gradient(45deg, #ffaa00, #ff4500); /* Set linear gradient background */
+    color: #fff; /* Set button text color */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-left: -200px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+   
+}
+.upcomingevent h1{
+    margin-top: 600px;
+   left: 200;
+   
+}
+
+.btnupcoming,
+.text1 {
+  display: inline-block;
+  margin: 0;
+}
+
+.btnupcoming {
+  margin-right: 10px; 
+
+}
+
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        z-index: 5;
+    }
+
+    .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+
+    .alert-error {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    /* Add styles for other categories as needed */
+    .alert {
+        position: relative;
+      }
+      
+      .close-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: black; /* Change the color as needed */
+      }
+
+

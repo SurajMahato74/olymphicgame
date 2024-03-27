@@ -1,0 +1,485 @@
+{% extends 'usernav.html' %}
+{% block title %}Live-sport{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin-top: 70px;
+        padding: 0;
+        max-width: 1400px;
+    }
+
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: black;
+        margin-left: -790px;
+        margin-top: -190px;
+        
+    }
+    .video-container {
+        flex: 1 0 70%;
+        background-color: black;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        
+    }
+    .video-player {
+        width: 100%;
+       
+    width: 100%;
+    
+
+        border-radius: 5px;
+    }
+    .options {
+        margin-top: -5px;
+        display: flex;
+        gap: 300px;
+        border: 1px solid #333;
+    }
+    .options button {
+        padding: 10px 20px;
+        background: transparent;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid #333;
+    }
+    .options button:hover {
+        background-color: #0056b3;
+    }
+
+   
+
+
+    .sidebar {
+        flex: 1 0 25%;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .channel-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .channel-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    .channel-list li:last-child {
+        border-bottom: none;
+    }
+    .channel-list li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    .channel-list li a:hover {
+        color: #007bff;
+    }
+
+    .choose {
+       
+        padding: 10px; /* Add padding for better spacing */
+        
+    }
+
+    .choose ul {
+        list-style-type: none; /* Remove default list style */
+        padding: 0; /* Remove default padding */
+        margin: 0; /* Remove default margin */
+    }
+
+    .choose ul li {
+        display: inline; /* Display list items in the same line */
+        margin-right: 10px; /* Add margin between list items */
+    }
+
+    .choose ul li a {
+        text-decoration: none; /* Remove underline from links */
+        color: white; /* Set link color */
+    }
+
+    .choose ul li a.active {
+    color: red;
+}
+
+
+
+.card {
+  max-width: 300px; /* Set maximum width */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 320px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card video {
+
+  width: 100%;
+  max-width: 100%; /* Ensure the video fits within the card */
+  height: 40%; /* Maintain aspect ratio */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 16px; /* Adjust font size */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 5px;
+}
+
+.card-btn-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.card-btn-icon i {
+  font-size: 20px; /* Adjust icon size */
+  cursor: pointer;
+}
+
+.card-btn-icon a {
+  color: black;
+  text-decoration: none;
+}
+
+.card-btn-icon i:hover {
+  color: #007bff;
+}
+
+.sidebar {
+    flex: 1 0 25%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.channel-table {
+    width: 100%; /* Make the table take full width */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.channel-table th,
+.channel-table td {
+    border: 1px solid black;
+    padding: 12px; /* Increase padding for better spacing */
+    text-align: left;
+}
+
+.channel-table th {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.channel-table td {
+    color: black; /* Text color for table cells */
+}
+
+/* Apply hover effect to even and odd rows */
+.channel-table tr:nth-child(even):hover {
+    background-color: #f2f2f2; /* Change background color on hover for even rows */
+}
+
+.channel-table tr:nth-child(odd):hover {
+    background-color: #e5e5e5; /* Change background color on hover for odd rows */
+}
+   
+.watch-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.watch-button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+<div class="choose">
+    <ul>
+        <li><a href="#" id="ongoing-live" class="{% if active_tab == 'ongoing' %}active{% endif %}">Ongoing Live</a></li>
+        <li><a href="#" id="upcoming-live" class="{% if active_tab == 'upcoming' %}active{% endif %}">Upcoming Live</a></li>
+        <li><a href="#" id="previous-live" class="{% if active_tab == 'previous' %}active{% endif %}">Previous Live</a></li>
+    </ul>
+</div>
+    
+
+<main>
+    <section id="ongoing-live-section" style="display: block; margin-top: 200px;">
+        <!-- Include the form or content for ongoing live events -->
+        <h2>Ongoing Live Events</h2>
+        <div class="container">
+            <div class="video-container">
+                <h6 style="color: red;">live</h6>
+    <div style="display: flex; align-items: center;gap:4px; margin-top: -10px;margin-left: -6px;">
+        <h4 class="viewer" style="margin-left:-1px;">1</h4>
+        <i class="fa-solid fa-eye" style="margin-top: -4px;"></i>
+    </div>
+    
+                <div class="video-player" style="margin-top: -20px;">
+                    <video id="firstvideoPlayer" autoplay loop muted width="100%" height="400">
+                        <!-- Initial placeholder video (optional) -->
+                        <source id="videoSource" src="/static/img/intro3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="options">
+                    <button id="like-button" style="display: flex; align-items: center; padding-right: 20px;">
+                        <i class="fa-solid fa-thumbs-up" style="margin-right: 5px;"></i>
+                        Like
+                    </button>
+                    <button id="comment-button" style="display: flex; align-items: center; padding-right: 20px;">
+                        <i class="fa-regular fa-comment" style="margin-right: 5px;"></i>
+                        Comment
+                    </button>
+                    <button id="share-button" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-share" style="margin-right: 5px;"></i>
+                        Share
+                    </button>
+                </div>
+                
+            </div>
+            <div class="sidebar">
+                <h2 style="color: black;">On Going Live</h2>
+                <ul class="channel-list">
+                    <li><a href="#" onclick="changeVideoSource('/static/img/intro1.mp4')">Channel 1</a></li>
+                    <li><a href="#" onclick="changeVideoSource('/static/img/intro2.mp4')">Channel 2</a></li>
+                    <li><a href="#" onclick="changeVideoSource('/static/img/intro4.mp4')">Channel 3</a></li>
+                    <li><a href="#" onclick="changeVideoSource('/static/img/intro.mp4')">Channel 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <section id="upcoming-live-section" style="display: none;margin-top: 250px;">
+        
+        <div class="container" id="cardContainer">
+            {% for show in upcoming_shows %}
+              <div class="card">
+               <video width="100%" height="40%" controls>
+                  <source src="data:video/mp4;base64,{{ show.video_base64 }}" type="video/mp4">
+                </video>
+               <div class="card-body">
+                 <h5 class="card-title">{{ show.title }}</h5>
+                 <p class="card-text"><strong style="color: black;">Game:</strong> {{ show.name }}</p>
+                 <p class="card-text"><strong style="color: black;">Category:</strong> {{ show.category }}</p>
+                 <p class="card-text"><strong style="color: black;">Release Date:</strong> <small class="text-muted">{{ show.release }}</small></p>
+                 <div class="card-btn-icon">
+                   <a href="{{ url_for('auth.detail',show_id=show.id) }}">
+                     <i class="fa-solid fa-circle-info" style="color: black;"></i>
+                   </a>
+                   <i class="fa-solid fa-heart" style="color: black;"></i>
+                 </div>
+               </div>
+              </div>
+            {% endfor %}
+         </div>
+         
+        
+    </section>
+    
+    <section id="previous-live-section" style="display: none; margin-top: 200px;">
+        <!-- Include the form or content for previous live events -->
+        <h2>Previous Live Events</h2>
+        <div class="container">
+            <div class="video-container">
+                <div class="video-player" style="height: 400px; width: 100%;">
+                    <video id="videoPlayer" autoplay loop muted width="100%" height="400">
+                        <!-- Initial placeholder video (optional) -->
+                        <source src="/static/img/intro3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                
+
+            
+            
+
+                <div class="options">
+                    <button id="like-button">Like</button>
+                    <button id="comment-button">Comment</button>
+                    <button id="share-button">Share</button>
+                </div>
+            </div>
+
+
+            <div class="sidebar" style="overflow-y: auto;">
+                <h2 style="color: black;">Previous Live</h2>
+                <table class="channel-table">
+                    <thead>
+                        <tr style="color: black;">
+                            <th>Name</th>
+                            <th>Release Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="previousShowsTableBody">
+                        <!-- Previous shows data will be dynamically added here -->
+                        {% for show in previous_shows %}
+                        <tr>
+                            <td>{{ show.name }}</td>
+                            <td>{{ show.release.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                <form class="watchForm">
+                                    <button type="button" class="watch-button" data-video-base64="{{ show.video_base64 }}">{{ show.name }}</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    
+                <div class="page-changer">
+                    <button class="clear-filters list-category-filter bc-clr" onclick="prevPage()">Previous</button>
+                    <button class="clear-filters list-category-filter bc-clr" onclick="nextPage()">Next</button>
+                 </div>
+            </div>
+        </div>
+    </section>
+    
+</main>
+<footer>
+    <p>&copy; 2024 Live Events</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function changeVideoSource(src) {
+        // Get the video source element
+        var videoSource = document.getElementById('videoSource');
+
+        // Change the source attribute
+        videoSource.src = src;
+
+        // Reload the video
+        var videoPlayer = document.getElementById('firstvideoPlayer');
+        videoPlayer.load();
+    }
+</script>
+<script>
+    const cardsPerPage = 3; // Change this value to adjust the number of cards per page
+    const tbody = document.getElementById('previousShowsTableBody');
+    const rows = tbody.querySelectorAll('tr');
+    let currentPage = 1;
+
+    function showCurrentPage() {
+        const startIndex = (currentPage - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+
+        rows.forEach((row, index) => {
+            row.style.display = index >= startIndex && index < endIndex ? 'table-row' : 'none';
+        });
+    }
+
+    function nextPage() {
+        const totalPages = Math.ceil(rows.length / cardsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showCurrentPage();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            showCurrentPage();
+        }
+    }
+
+    // Initial display
+    showCurrentPage();
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.watch-button').click(function() {
+            var videoBase64 = $(this).data('video-base64');
+            var videoPlayer = $('#videoPlayer')[0]; // Get the DOM element of the video player
+            if (videoBase64) {
+                // Set the source of the video player to the base64-encoded video data
+                videoPlayer.src = 'data:video/mp4;base64,' + videoBase64;
+                videoPlayer.play(); // Play the video
+            }
+        });
+    });
+    </script>
+
+<script>
+    // JavaScript code to handle clicks on navigation links and display the corresponding section
+    document.getElementById('ongoing-live').addEventListener('click', function(event) {
+        event.preventDefault();
+        hideAllSections();
+        document.getElementById('ongoing-live-section').style.display = 'block';
+    });
+
+    document.getElementById('upcoming-live').addEventListener('click', function(event) {
+        event.preventDefault();
+        hideAllSections();
+        document.getElementById('upcoming-live-section').style.display = 'block';
+    });
+
+    document.getElementById('previous-live').addEventListener('click', function(event) {
+        event.preventDefault();
+        hideAllSections();
+        document.getElementById('previous-live-section').style.display = 'block';
+    });
+
+    function hideAllSections() {
+        document.getElementById('ongoing-live-section').style.display = 'none';
+        document.getElementById('upcoming-live-section').style.display = 'none';
+        document.getElementById('previous-live-section').style.display = 'none';
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.choose a').click(function(event) {
+            event.preventDefault();  // Prevent default link behavior
+            $('.choose a').removeClass('active');  // Remove 'active' class from all tabs
+            $(this).addClass('active');  // Add 'active' class to the clicked tab
+        });
+    });
+</script>
+
+
+
+
+
+
+{% endblock %}

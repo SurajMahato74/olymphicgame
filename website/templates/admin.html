@@ -1,0 +1,433 @@
+{% extends 'usernav.html' %}
+{% block title %}Homepage{% endblock %}
+{% block content %}
+      <style>
+         .message{
+         z-index: 1000;
+         }
+         .icon {
+         margin-right: 80px; /* Move the icons to the left */
+         }
+         .icon a {
+         margin-right:30px; /* Adjust the space between icons */
+         font-size: large;
+         margin-left: 25px;
+         }
+         .second-nav {
+         margin-top: 60px; /* Adjust the margin-top value as needed */
+         }
+         .navbar2 {
+         border: none; /* Remove the default border from the navbar */
+         }
+         .navbar-toggler-icon {
+         font-size: 14px; /* Adjust the font-size of the navbar toggler icon */
+         }
+         .navbar-nav .nav-link {
+         font-size: 14px; /* Adjust the font-size of the nav links */
+         color: black;
+         }
+         .navbar {
+         background-color: white; /* Change the background color to white */
+         border: none;
+         }
+         .form-control {
+         width: 120px; /* Adjust the width of the search input */
+         margin-right: 5px; /* Add some spacing between search input and button */
+         }
+         .btn-outline-success {
+         padding: 2px 5px; /* Adjust padding for the search button */
+         font-size: 12px; /* Adjust font-size for the search button */
+         }
+         .search-section{
+         margin-top: 100px;
+         }
+         .search-section {
+         background-color: #f8f9fa; /* Optional: Add a background color to the search section */
+         }
+         .form-inputs {
+         width: 70%; /* Set the width to 50% for half of the screen */
+         margin: 0 auto; /* Center the form inputs horizontally */
+         height: 50px;
+         margin-left: 10px;
+         }
+         .form-inputs input {
+         width: 60%; /* Make the input take up 100% of the available width */
+         border-radius: 30px; /* Optional: Add border-radius for a rounded look */
+         }
+         .form-inputs i {
+         margin-left: -40px; /* Adjust the margin for the search icon */
+         cursor: pointer;
+         margin-top: 15px;
+         font-size: 22px;
+
+         }
+         .two-column {
+         margin-right: 550px; /* Adjust the value as needed for the desired space */
+         }
+         .image-add {
+    height: 400px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: none;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.imgSlider{
+  width: 99%;
+  height: 190%;
+  background-image: url('/static/img/background1.jpg');
+  border-radius: 35px;
+  background-size: 100% 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9); 
+  animation: changeImage 30s linear infinite;
+  margin-top: 50px;
+
+}
+
+@keyframes changeImage{
+  0%{
+background-image: url('/static/img/background1.jpg');
+  }
+  25%{
+    background-image:url('/static/img/background.jpg') ;
+  }
+  50%{
+    background-image:url('/static/img/image3.jpg') ;
+  }
+  75%{
+    background-image: url('/static/img/image4.jpg');
+  }
+  100%{
+    background-image:url('/static/img/image5.jpg') ;
+  }
+}
+
+
+
+         .black-background {
+        background: transparent; 
+        }
+        .user {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: -300px;
+
+  object-fit: cover;
+}
+.user h4{
+  margin-top: 3px;
+  margin-left: 12px;
+  cursor: pointer;
+}
+.user h6{
+  margin-top: -30px;
+  margin-left: -140px;
+  cursor: pointer;
+}
+.filter{
+  background: transparent;
+  padding: 20px;
+  
+}
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  color: black;
+  
+}
+
+#nothing-alert{
+  display: none;
+  width: 100%;
+  margin: 50px auto;
+  text-align: center;
+}
+
+
+
+@keyframes populate {
+  0% {
+    transform: scale(0);
+  }
+}
+
+.icon-name {
+  font-size: 0.7em;
+  text-align: center;
+  margin: 0;
+  color: black;
+}
+
+
+
+.search-container{
+  position: relative;
+  height: 45px;
+  max-width: 650px;
+  width: 70%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top: -11px;
+  margin-left: 350px;
+  color: black;
+}
+
+.search-container i {
+  position: absolute;
+  left: 20px;
+  font-size: 16px;
+  color: black;
+  
+}
+
+#search-input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-left: 50px;
+  background-color: transparent;
+  color: black;
+}
+
+@media screen and (max-width: 786px) {
+  .search-container{
+    width: 50%;
+  }
+}
+
+.search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            
+           
+
+        }
+
+        .search-container i {
+            margin-right: 10px;
+        }
+
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust the space between cards */
+    padding: 20px;
+}
+
+.card {
+    
+    max-width: 400px; /* Set a maximum width for the card */
+    height: 300px; /* Set the height for the card */
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card img,
+.card video {
+    width: 100%;
+    height: 30%; /* Adjust the height of the image or video */
+    object-fit: cover; /* Cover the entire area of the card */
+    object-position: center; /* Center the image or video */
+}
+
+.card-body {
+    padding: 10px;
+}
+
+
+        .message{
+        z-index: 1000;
+      }
+      .message-container {
+    position: fixed;
+    top: -70px;
+    right: 20px;
+color: black;
+    z-index: 1000;
+    background-color: aqua;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: black;
+}
+
+.alert-success {
+    background-color: lightblue;
+    border-color: black;
+    color: black;
+}
+
+.alert-error {
+    background-color: lightgreen;
+    border-color: black;
+    color: black;
+}
+
+.close-icon {
+    cursor: pointer;
+    font-size: 16px;
+    color: red;
+    margin-right: -40px;
+    
+}
+
+
+
+.close-icon:hover {
+    color: white;
+}
+
+.icon-container {
+    display: flex; /* Use flexbox to align items in a row */
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Adjust margin to create space between the icons */
+.fa-circle-info {
+    margin-right: 190px; /* Adjust as needed */
+}
+
+
+      </style>
+   </head>
+     <div class="image-add">
+        <div class="imgSlider">
+
+        </div>
+        <div class="message">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" id="flash-message">
+                  {{ message }}
+                  <span class="close-icon" onclick="hideMessage(this)">X</span>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+    </div>
+
+
+  
+ 
+
+    <div class="filter">
+      <div class="search-container">
+        <i class="fa fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search..." autocomplete="off" />
+    </div>
+     
+      <div class="main-container" id="main-container">
+        
+        {% for shows in shows_data %}
+        <div class="card">
+          <video width="100%" height="40%" controls>
+            <source src="data:video/mp4;base64,{{ shows.video_base64 }}" type="video/mp4">
+        </video>
+    
+            <div class="card-body">
+                <h5 class="card-title" style="color: black;">{{ shows.title }}</h5>
+                <p class="card-text"><strong style="color: black;">Game:</strong> <span style="color: black;">{{ shows.name }}</span></p>
+                <p class="card-text"><strong style="color: black;">Category:</strong> <span style="color: black;">{{ shows.category }}</span></p>
+                <p class="card-text"><strong style="color: black;">Release Date:</strong> <span style="color: black;">{{ shows.release }}</span></p>
+                <div class="card-btn-icon">
+                    <div class="icon-container">
+
+                      
+                        <a href="{{ url_for('auth.detail', show_id=shows.id) }}">
+                            <i class="fa fa-info-circle" style="color: black; font-size: 30px; margin-right: 100px;"></i>
+                        </a>
+                    
+                    
+                        <form action="{{ url_for('auth.admin') }}" method="post" class="save-favorite-form">
+                          <input type="hidden" name="show_id" value="{{ shows.id }}">
+                          <button type="submit" class="heart-btn" style="border: none; background-color: transparent;">
+                            {% if shows.id in saved_shows %}
+                                <i class="fa-solid fa-heart saved" style="color: red; font-size: 30px;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-heart" style="color: black; font-size: 30px;"></i>
+                            {% endif %}
+                        </button>
+                      </form>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+
+      // Get references to the input field and the main container
+      const searchInput = document.getElementById('search-input');
+      const mainContainer = document.getElementById('main-container');
+      
+      // Add event listener to the input field
+      searchInput.addEventListener('input', function() {
+          // Get the search query
+          const query = searchInput.value.toLowerCase();
+          
+          // Get all card elements
+          const cards = mainContainer.getElementsByClassName('card');
+          
+          // Loop through each card
+          Array.from(cards).forEach(card => {
+              // Get the title of the card
+              const title = card.querySelector('.card-title').textContent.toLowerCase();
+              
+              // Show or hide the card based on whether it matches the search query
+              if (title.includes(query)) {
+                  card.style.display = 'block';
+              } else {
+                  card.style.display = 'none';
+              }
+          });
+      });
+
+    });
+  </script>
+
+      
+      
+
+ <script>
+        function hideMessage(element) {
+          element.parentElement.style.display = 'none';
+        }
+      </script>
+    <script src="/static/script.js" defer></script>
+    
+    {% endblock %}  

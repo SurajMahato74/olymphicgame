@@ -1,0 +1,208 @@
+{% extends 'adminav.html' %}
+{% block title %} User{% endblock %}
+{% block content %}
+
+<style>
+    .user-data-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+  
+    .user-data-form h4 {
+      margin-top: 0;
+      color: #333;
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .left-column {
+      width: 50%;
+    }
+  
+    .right-column {
+      width: 50%;
+    }
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .password-form {
+        display: none; /* Initially hide the form */
+        margin-top: 20px;
+        margin-left: 360px;
+        border: 1px solid black;
+        width: 305px;
+        padding: 10px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+  
+   
+  </style>
+  
+   
+  
+  
+
+<style>
+    
+.search-box {
+  width: 300px;
+  margin: 5px auto;
+  border-radius: 12px;
+  background-color: aliceblue;
+  box-shadow: #333;
+  margin-top: -20px;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  margin-left: 40px;
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 30%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+</style>
+<div class="message" style="margin-top: -20px; margin-bottom: 10px;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" id="flash-message">
+          {{ message }}
+          <span class="close-icon" onclick="hideMessage(this)" style="cursor: pointer; margin-left: 800px;">X</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="box">
+  <form action="{{ url_for('auth.resetuser') }}" method="post" id="search-form">
+    <div class="search-box" style="border: 1px solid #333;">
+      <h3 style="margin-left: 85px;">Search User</h3>
+      <input type="text" name="email" placeholder="Search by email..." id="search-input">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>
+<div class="password-form" id="passwordForm">
+  <form id="passwordChangeForm" action="{{ url_for('auth.update_password') }}" method="post">
+    {% if user_data %}
+    <input type="hidden" id="userEmail" name="email" value="{{ user_data.email }}">
+    {% endif %}
+    <label for="newPassword">Enter New Password:</label><br>
+    <input type="password" id="newPassword" name="newPassword"><br>
+    <button type="submit" style="margin-left: 12px; width: 150px;">Save New Password</button>
+  </form>
+</div>
+
+{% if user_data %}
+<form action="{{ url_for('auth.resetuser') }}" method="post">
+    <input type="hidden" name="email" value="{{ user_data.email }}"> <!-- Hidden input field for email -->
+    <div class="user-data-form">
+        <div class="form-column">
+            <div class="form-group">
+                <label for="user-email">Email:</label>
+                <input type="email" id="user-email" name="user-email" class="form-control" value="{{ user_data.email }}">
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" style="margin-left: -1px; width: 250px;" id="username" name="username" class="form-control" value="{{ user_data.username }}">
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" style="margin-left: -1px; width: 250px;" id="country" name="country" class="form-control" value="{{ user_data.country }}">
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input type="tel" id="phone-number" name="phone-number" class="form-control" value="{{ user_data.phone_number }}">
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px; margin-left: -80px;">
+      <button type="submit" style="width: 100px;" name="save" value="save">Save</button>
+      <button type="button" style="width: 150px;" id="changePasswordBtn">Change Password</button>
+      <a href="{{ url_for('auth.userprofile', email=user_data.email) }}"><button type="button" style="width: 100px;">See Profile</button></a>
+      
+  </div>
+   
+</form>
+{% elif error_message %}
+<div class="user-data-form">
+    <p>{{ error_message }}</p>
+</div>
+{% endif %}
+
+<script>
+  function hideMessage(element) {
+    element.parentElement.style.display = 'none';
+  }
+</script>
+<script>
+  document.getElementById('changePasswordBtn').addEventListener('click', function() {
+      var passwordForm = document.getElementById('passwordForm');
+      if (passwordForm.style.display === 'none') {
+          passwordForm.style.display = 'block';
+          var userEmail = document.getElementById('user-email').value;
+          document.getElementById('userEmail').value = userEmail; // Set the user email in the hidden input field
+      } else {
+          passwordForm.style.display = 'none';
+      }
+  });
+  </script>
+  
+ 
+    
+    
+  
+
+{% endblock %}
