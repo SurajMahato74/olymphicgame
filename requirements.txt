@@ -30,7 +30,7 @@ MarkupSafe==2.1.5
 matplotlib==3.8.2
 mysql-connector-python==8.2.0
 numpy==1.26.2
-opencv-python==4.5.5.62
+opencv-python-headless==4.5.1.48
 packaging==23.2
 pandas==2.1.4
 Pillow==10.1.0
